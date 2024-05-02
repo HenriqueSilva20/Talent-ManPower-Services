@@ -16,6 +16,8 @@ class AdminInfoVaga extends Controller
         $vaga = Vagas::findOrFail(base64_decode($id));
         $titulo = ($titulo);
 
+        
+
         return view('Admin.infovaga', compact('vaga', 'titulo'));
     }
 
