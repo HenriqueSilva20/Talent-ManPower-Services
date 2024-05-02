@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Candidatos;
 use App\Models\Vagas;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,9 @@ class AdminInfoVaga extends Controller
         $vaga = Vagas::findOrFail(base64_decode($id));
         $titulo = ($titulo);
 
-        
+        $candidatos = Candidatos::where('idvaga', base64_decode($id))->paginate(12);
 
-        return view('Admin.infovaga', compact('vaga', 'titulo'));
+        return view('Admin.infovaga', compact('vaga', 'titulo', 'candidatos'));
     }
 
     /**

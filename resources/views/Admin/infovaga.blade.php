@@ -97,6 +97,7 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="card p-4">
+                                @if (count($candidatos) > 0)
                                 <table>
                                     <thead style="margin-bottom: 20px !important;">
                                         <tr style="margin-bottom: 20px !important;">
@@ -111,222 +112,6 @@
                                                 <span style="margin-bottom: 25px;">
                                                     <a style="color: #43797E; text-decoration: none;" href="#">Helder
                                                         Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;" href="#">Helder
-                                                        Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;" href="#">Helder
-                                                        Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">Helder Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">Helder Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">Helder Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">Helder Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">Helder Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">Helder Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">Helder Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">Helder Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">Helder Adelino Cambuta</a>
-                                                </span>
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
-                                                </span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">Helder Adelino Cambuta</a>
                                                 </span>
                                                 <span style="margin-bottom: 25px;">
                                                     <a style="color: #43797E; text-decoration: none;"
@@ -411,6 +196,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                @else
+                                <p class="text-center p-4">
+                                    Nenhum candidato inscrito nesta vaga!
+                                </p>
+                                @endif
+
                             </div>
                         </div>
                     </div>
