@@ -107,34 +107,37 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($candidatos as $candidato)
                                         <tr class="mb-4">
                                             <td style="font-size: .7rem; font-weight: 450;">
                                                 <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;" href="#">Helder
-                                                        Adelino Cambuta</a>
-                                                </span>
+                                                    <a href="{{ route('painel.candidatos', ['id' => base64_encode($candidato->id), 'nome' => $candidato->nome]) }}" style="color: #43797E; text-decoration: none;" href="#">
+                                                    {{ $candidato->nome }}
+                                                    </a>
+                                                </span><br>
                                                 <span style="margin-bottom: 25px;">
-                                                    <a style="color: #43797E; text-decoration: none;"
-                                                        href="#">heldercmbuta444@gmail.com</a>
+                                                    <a href="{{ route('painel.candidatos', ['id' => base64_encode($candidato->id), 'nome' => $candidato->nome]) }}" style="color: #43797E; text-decoration: none;"
+                                                        href="#">{{ $candidato->email }}</a>
                                                 </span>
                                             </td>
                                             <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">22/04/2024 - 10h:30</span>
+                                                <span style="margin-bottom: 25px;">{{ date('d/m/Y - H:m', strtotime($candidato->created_at)) }}</span>
                                             </td>
                                             <td style="font-size: .7rem; font-weight: 450;">
                                                 <span style="margin-bottom: 25px;">Perfil 85% correspondente</span>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 <div class="mt-4" style="border-top: 1px solid #828282; padding-top: 12px;">
                                     <div class="d-flex justify-content-between">
-                                        <span style="font-size: .8rem;">Mostrando 10 de 228 items</span>
+                                        <span style="font-size: .8rem;">Mostrando {{ $candidatos->count() }} de {{ $candidatos->total() }} items</span>
                                         <div class="d-flex">
-                                            <span style="font-size: .8rem; margin-right: 20px; margin-top: 4px;">Página 1
-                                                de 11</span>
+                                            <span style="font-size: .8rem; margin-right: 20px; margin-top: 4px;">Página {{ $candidatos->currentPage() }} de {{ $candidatos->lastPage() }}</span>
                                             <div class="opcoes-table">
-                                                <a href="#" class="">
+                                                @if ($candidatos->previousPageUrl())
+                                                <a href="{{ $candidatos->previousPageUrl() }}" class="">
                                                     <svg width="28" height="28" viewBox="0 0 28 28"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <g opacity="0.5">
@@ -151,33 +154,9 @@
                                                         </g>
                                                     </svg>
                                                 </a>
-                                                <a href="#" class="">
-                                                    <svg width="28" height="28" viewBox="0 0 28 28"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <g opacity="0.5">
-                                                            <rect x="0.5" y="0.5" width="27" height="27"
-                                                                rx="5.5" fill="#2BB2BB" />
-                                                            <rect x="0.5" y="0.5" width="27" height="27"
-                                                                rx="5.5" stroke="#2BB2BB" />
-                                                            <path d="M16 18L12 14L16 10" stroke="white"
-                                                                stroke-width="1.33333" stroke-linecap="round"
-                                                                stroke-linejoin="round" />
-                                                        </g>
-                                                    </svg>
-                                                </a>
-                                                <a href="#" class="">
-                                                    <svg width="28" height="28" viewBox="0 0 28 28"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect x="0.5" y="0.5" width="27" height="27"
-                                                            rx="5.5" fill="#2BB2BB" />
-                                                        <rect x="0.5" y="0.5" width="27" height="27"
-                                                            rx="5.5" stroke="#2BB2BB" />
-                                                        <path d="M12.0001 18L16.0001 14L12.0001 10" stroke="white"
-                                                            stroke-width="1.33333" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </svg>
-                                                </a>
-                                                <a href="#" class="">
+                                                @endif
+                                                @if ($candidatos->nextPageUrl())
+                                                <a href="{{ $candidatos->nextPageUrl() }}" class="">
                                                     <svg width="28" height="28" viewBox="0 0 28 28"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <rect x="0.5" y="0.5" width="27" height="27"
@@ -192,6 +171,7 @@
                                                             stroke-linejoin="round" />
                                                     </svg>
                                                 </a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

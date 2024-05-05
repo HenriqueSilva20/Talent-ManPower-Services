@@ -27,145 +27,182 @@
                 @include('Layouts.Admin.aside')
 
                 @if (isset($_GET['store']))
-                <div class="col-lg-9">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h5 style="font-size: .9rem;" class="mb-4">Actualizar Informações da Vaga</h5>
-                        </div>
-                        <div class="col-lg-12 mb-2">
-                            <div class="card p-4">
-                                <form action="{{ route('painel.store.update', $vaga->id) }}" method="post">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-lg-12 mb-4">
-                                            <label for="titulo">Titulo</label>
-                                            <input type="text"
-                                                style="border-top: none !important; outline: none !important; border-left: none !important; border-right: none !important;"
-                                                name="titulo" id="titulo" class="form-control"
-                                                value="{{ $vaga->titulo }}">
+                    <div class="col-lg-9">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h5 style="font-size: .9rem;" class="mb-4">Actualizar Informações da Vaga</h5>
+                            </div>
+                            <div class="col-lg-12 mb-2">
+                                <div class="card p-4">
+                                    <form action="{{ route('painel.store.update', $vaga->id) }}" method="post">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-lg-12 mb-4">
+                                                <label for="titulo">Titulo</label>
+                                                <input type="text"
+                                                    style="border-top: none !important; outline: none !important; border-left: none !important; border-right: none !important;"
+                                                    name="titulo" id="titulo" class="form-control"
+                                                    value="{{ $vaga->titulo }}">
+                                            </div>
+                                            <div class="col-lg-6 mb-4">
+                                                <label style="font-weight: 570;" for="vagas">Nº De Vagas</label>
+                                                <input type="number" name="vagas" id="vagas"
+                                                    value="{{ $vaga->vagas }}" class="form-control">
+                                            </div>
+                                            <div class="col-lg-6 mb-4">
+                                                <label style="font-weight: 570;" for="data_init">Data de Termino</label>
+                                                <input type="date" name="data_init" id="data_init"
+                                                    value="{{ $vaga->data_termino }}" class="form-control">
+                                            </div>
+                                            @php
+                                                $palavraschave = json_decode($vaga->palavras_chaves);
+                                            @endphp
+                                            @foreach ($palavraschave as $keyword)
+                                                <div class="col-lg-12 mb-2" id="keyword">
+                                                    <label style="font-weight: 570;"
+                                                        for="palavraschave">Palavras-chave</label><br>
+                                                    <a class="removeItem"
+                                                        style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">-
+                                                        Excluir</a>
+                                                    <input type="text" name="palavraschave[]" value="{{ $keyword }}"
+                                                        id="palavraschave" placeholder="Insira a palavra-chave"
+                                                        class="form-control">
+                                                </div>
+                                            @endforeach
+                                            <div class="col-lg-12 mb-4">
+                                                <a id="addKeyWord"
+                                                    style="cursor: pointer; color: blue; text-decoration: none">+
+                                                    Palavras-chave</a>
+                                            </div>
+                                            @php
+                                                $requisitos = json_decode($vaga->requisitos);
+                                            @endphp
+                                            @foreach ($requisitos as $req)
+                                                <div class="col-lg-12 mb-2" id="requisitos_box">
+                                                    <label style="font-weight: 570;" for="requisito">Requisitos</label><br>
+                                                    <a class="removeItemRequisito"
+                                                        style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">-
+                                                        Excluir</a>
+                                                    <input type="text" name="requisito[]" value="{{ $req }}"
+                                                        id="requisito" placeholder="Insira o requisito"
+                                                        class="form-control">
+                                                </div>
+                                            @endforeach
+                                            <div class="col-lg-12 mb-4">
+                                                <a id="addRequisitos"
+                                                    style="cursor: pointer; color: blue; text-decoration: none">+
+                                                    Requisito</a>
+                                            </div>
+                                            @php
+                                                $qualificacoes = json_decode($vaga->qualificacoes);
+                                            @endphp
+                                            @foreach ($qualificacoes as $qualificacao)
+                                                <div class="col-lg-12 mb-2" id="qualificacoes_box">
+                                                    <label style="font-weight: 570;"
+                                                        for="qualificacoes">Qualificações</label><br>
+                                                    <a class="removeItemQualificacoes"
+                                                        style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">-
+                                                        Excluir</a>
+                                                    <input type="text" name="qualificacoes[]" value="{{ $qualificacao }}"
+                                                        id="qualificacoes" placeholder="Insira a qualificação"
+                                                        class="form-control">
+                                                </div>
+                                            @endforeach
+                                            <div class="col-lg-12 mb-4">
+                                                <a id="addQualificacoes"
+                                                    style="cursor: pointer; color: blue; text-decoration: none">+
+                                                    Qualificações</a>
+                                            </div>
+                                            <div class="col-lg-3 mb-4">
+                                                <button type="submit" class="btn btn-opcoes text-white">Actualizar</button>
+                                                <a href="{{ route('painel.vagas') }}" type="submit"
+                                                    class="btn btn-opcoes-2 text-white">Cancelar</a>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-6 mb-4">
-                                            <label style="font-weight: 570;" for="vagas">Nº De Vagas</label>
-                                            <input type="number" name="vagas" id="vagas" value="{{ $vaga->vagas }}" class="form-control">
-                                        </div>
-                                        <div class="col-lg-6 mb-4">
-                                            <label style="font-weight: 570;" for="data_init">Data de Termino</label>
-                                            <input type="date" name="data_init" id="data_init" value="{{ $vaga->data_termino }}" class="form-control">
-                                        </div>
-                                        @php
-                                            $palavraschave = json_decode($vaga->palavras_chaves);
-                                        @endphp
-                                        @foreach ($palavraschave as $keyword)
-                                        <div class="col-lg-12 mb-2" id="keyword">
-                                            <label style="font-weight: 570;" for="palavraschave">Palavras-chave</label><br>
-                                            <a class="removeItem" style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">- Excluir</a>
-                                            <input type="text" name="palavraschave[]" value="{{ $keyword }}" id="palavraschave"
-                                                placeholder="Insira a palavra-chave" class="form-control">
-                                        </div>
-                                        @endforeach
-                                        <div class="col-lg-12 mb-4">
-                                            <a id="addKeyWord" style="cursor: pointer; color: blue; text-decoration: none">+ Palavras-chave</a>
-                                        </div>
-                                        @php
-                                            $requisitos = json_decode($vaga->requisitos);
-                                        @endphp
-                                        @foreach ($requisitos as $req)
-                                        <div class="col-lg-12 mb-2" id="requisitos_box">
-                                            <label style="font-weight: 570;" for="requisito">Requisitos</label><br>
-                                            <a class="removeItemRequisito" style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">- Excluir</a>
-                                            <input type="text" name="requisito[]" value="{{ $req }}" id="requisito"
-                                                placeholder="Insira o requisito" class="form-control">
-                                        </div>
-                                        @endforeach
-                                        <div class="col-lg-12 mb-4">
-                                            <a id="addRequisitos" style="cursor: pointer; color: blue; text-decoration: none">+ Requisito</a>
-                                        </div>
-                                        @php
-                                            $qualificacoes = json_decode($vaga->qualificacoes);
-                                        @endphp
-                                        @foreach ($qualificacoes as $qualificacao)
-                                        <div class="col-lg-12 mb-2" id="qualificacoes_box">
-                                            <label style="font-weight: 570;" for="qualificacoes">Qualificações</label><br>
-                                            <a class="removeItemQualificacoes" style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">- Excluir</a>
-                                            <input type="text" name="qualificacoes[]" value="{{ $qualificacao }}" id="qualificacoes"
-                                                placeholder="Insira a qualificação" class="form-control">
-                                        </div>
-                                        @endforeach
-                                        <div class="col-lg-12 mb-4">
-                                            <a id="addQualificacoes" style="cursor: pointer; color: blue; text-decoration: none">+ Qualificações</a>
-                                        </div>
-                                        <div class="col-lg-3 mb-4">
-                                            <button type="submit" class="btn btn-opcoes text-white">Actualizar</button>
-                                            <a href="{{ route('painel.vagas') }}" type="submit" class="btn btn-opcoes-2 text-white">Cancelar</a>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @else
-                <div class="col-lg-9">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h5 style="font-size: .9rem;" class="mb-4">Cadastrar</h5>
-                        </div>
-                        <div class="col-lg-12 mb-2">
-                            <div class="card p-4">
-                                <form action="{{ route('painel.create.vaga') }}" method="post">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-lg-12 mb-4">
-                                            <label for="titulo">Titulo</label>
-                                            <input type="text"
-                                                style="border-top: none !important; outline: none !important; border-left: none !important; border-right: none !important;"
-                                                name="titulo" id="titulo" class="form-control"
-                                                placeholder="Titulo da vaga">
+                    <div class="col-lg-9">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h5 style="font-size: .9rem;" class="mb-4">Cadastrar</h5>
+                            </div>
+                            <div class="col-lg-12 mb-2">
+                                <div class="card p-4">
+                                    <form action="{{ route('painel.create.vaga') }}" method="post">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-lg-12 mb-4">
+                                                <label for="titulo">Titulo</label>
+                                                <input type="text"
+                                                    style="border-top: none !important; outline: none !important; border-left: none !important; border-right: none !important;"
+                                                    name="titulo" id="titulo" class="form-control"
+                                                    placeholder="Titulo da vaga">
+                                            </div>
+                                            <div class="col-lg-6 mb-4">
+                                                <label style="font-weight: 570;" for="vagas">Nº De Vagas</label>
+                                                <input type="number" name="vagas" id="vagas"
+                                                    class="form-control">
+                                            </div>
+                                            <div class="col-lg-6 mb-4">
+                                                <label style="font-weight: 570;" for="data_init">Data de Termino</label>
+                                                <input type="date" name="data_init" id="data_init"
+                                                    class="form-control">
+                                            </div>
+                                            <div class="col-lg-12 mb-2" id="keyword">
+                                                <label style="font-weight: 570;"
+                                                    for="palavraschave">Palavras-chave</label><br>
+                                                <a class="removeItem"
+                                                    style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">-
+                                                    Excluir</a>
+                                                <input type="text" name="palavraschave[]" id="palavraschave"
+                                                    placeholder="Insira a palavra-chave" class="form-control">
+                                            </div>
+                                            <div class="col-lg-12 mb-4">
+                                                <a id="addKeyWord"
+                                                    style="cursor: pointer; color: blue; text-decoration: none">+
+                                                    Palavras-chave</a>
+                                            </div>
+                                            <div class="col-lg-12 mb-2" id="requisitos_box">
+                                                <label style="font-weight: 570;" for="requisito">Requisitos</label><br>
+                                                <a class="removeItemRequisito"
+                                                    style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">-
+                                                    Excluir</a>
+                                                <input type="text" name="requisito[]" id="requisito"
+                                                    placeholder="Insira o requisito" class="form-control">
+                                            </div>
+                                            <div class="col-lg-12 mb-4">
+                                                <a id="addRequisitos"
+                                                    style="cursor: pointer; color: blue; text-decoration: none">+
+                                                    Requisito</a>
+                                            </div>
+                                            <div class="col-lg-12 mb-2" id="qualificacoes_box">
+                                                <label style="font-weight: 570;"
+                                                    for="qualificacoes">Qualificações</label><br>
+                                                <a class="removeItemQualificacoes"
+                                                    style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">-
+                                                    Excluir</a>
+                                                <input type="text" name="qualificacoes[]" id="qualificacoes"
+                                                    placeholder="Insira a qualificação" class="form-control">
+                                            </div>
+                                            <div class="col-lg-12 mb-4">
+                                                <a id="addQualificacoes"
+                                                    style="cursor: pointer; color: blue; text-decoration: none">+
+                                                    Qualificações</a>
+                                            </div>
+                                            <div class="col-lg-3 mb-4">
+                                                <button type="submit" class="btn btn-opcoes text-white">Cadastrar
+                                                    Vaga</button>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-6 mb-4">
-                                            <label style="font-weight: 570;" for="vagas">Nº De Vagas</label>
-                                            <input type="number" name="vagas" id="vagas" class="form-control">
-                                        </div>
-                                        <div class="col-lg-6 mb-4">
-                                            <label style="font-weight: 570;" for="data_init">Data de Termino</label>
-                                            <input type="date" name="data_init" id="data_init" class="form-control">
-                                        </div>
-                                        <div class="col-lg-12 mb-2" id="keyword">
-                                            <label style="font-weight: 570;" for="palavraschave">Palavras-chave</label><br>
-                                            <a class="removeItem" style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">- Excluir</a>
-                                            <input type="text" name="palavraschave[]" id="palavraschave"
-                                                placeholder="Insira a palavra-chave" class="form-control">
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <a id="addKeyWord" style="cursor: pointer; color: blue; text-decoration: none">+ Palavras-chave</a>
-                                        </div>
-                                        <div class="col-lg-12 mb-2" id="requisitos_box">
-                                            <label style="font-weight: 570;" for="requisito">Requisitos</label><br>
-                                            <a class="removeItemRequisito" style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">- Excluir</a>
-                                            <input type="text" name="requisito[]" id="requisito"
-                                                placeholder="Insira o requisito" class="form-control">
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <a id="addRequisitos" style="cursor: pointer; color: blue; text-decoration: none">+ Requisito</a>
-                                        </div>
-                                        <div class="col-lg-12 mb-2" id="qualificacoes_box">
-                                            <label style="font-weight: 570;" for="qualificacoes">Qualificações</label><br>
-                                            <a class="removeItemQualificacoes" style="font-size: .7rem; cursor: pointer; color: red; text-decoration: none">- Excluir</a>
-                                            <input type="text" name="qualificacoes[]" id="qualificacoes"
-                                                placeholder="Insira a qualificação" class="form-control">
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <a id="addQualificacoes" style="cursor: pointer; color: blue; text-decoration: none">+ Qualificações</a>
-                                        </div>
-                                        <div class="col-lg-3 mb-4">
-                                            <button type="submit" class="btn btn-opcoes text-white">Cadastrar Vaga</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endif
 
             </div>
@@ -288,22 +325,20 @@
                 firstInput.focus();
             }
         });
-
-
     </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    @if(session('vaga.create.error'))
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Cadastro Falhou',
-            text: 'Ocorreu um erro ao cadastrar a vaga. Tente novamente!',
-            timer: 4500
-        })
-    </script>
+    @if (session('vaga.create.error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Cadastro Falhou',
+                text: 'Ocorreu um erro ao cadastrar a vaga. Tente novamente!',
+                timer: 4500
+            })
+        </script>
     @endif
 
 @endsection

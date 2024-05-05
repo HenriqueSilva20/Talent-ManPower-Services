@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Candidatos;
 use Illuminate\Http\Request;
 
 class AdminCandidatos extends Controller
@@ -10,9 +11,11 @@ class AdminCandidatos extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $id, string $nome_candidato)
     {
-        return view('Admin.candidato');
+        $nome = $nome_candidato;
+        $candidato = Candidatos::findOrFail(base64_decode($id));
+        return view('Admin.candidato', compact('candidato', 'nome'));
     }
 
     /**
@@ -62,4 +65,22 @@ class AdminCandidatos extends Controller
     {
         //
     }
+
+    public function estado($id, $estado)
+    {
+
+        try {
+            $candidato = Candidatos::findOrFail($id);
+            $candidato->estado = $estado;
+            $candidato->save();
+
+            return redirect()->back()->with('candidato.estado.success', 1);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()->with('candidato.estado.error', 1);
+        }
+
+    }
+
 }

@@ -12,14 +12,27 @@
                 </a>
             </li>
             <li class="nav-menu">
-                <a href="#" class="link-menu">
+                <a href="{{ route('painel.admins') }}" class="link-menu">
                     <span>
-                        <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.875 5C6.76248 5 5.67495 5.3299 4.74992 5.94798C3.82489 6.56607 3.10392 7.44457 2.67818 8.47241C2.25244 9.50024 2.14104 10.6312 2.35809 11.7224C2.57513 12.8135 3.11086 13.8158 3.89753 14.6025C4.6842 15.3891 5.68648 15.9249 6.77762 16.1419C7.86876 16.359 8.99976 16.2476 10.0276 15.8218C11.0554 15.3961 11.9339 14.6751 12.552 13.7501C13.1701 12.8251 13.5 11.7375 13.5 10.625H7.875V5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M10.125 8.375H15.75C15.75 6.88316 15.1574 5.45242 14.1025 4.39752C13.0476 3.34263 11.6168 2.75 10.125 2.75V8.375Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <i class="bi bi-people"></i>
                     </span>
-                    ESTATÍSTICAS
+                    ADMINISTRADORES
+                </a>
+            </li>
+            <li class="nav-menu">
+                <a href="{{ route('painel.caixa') }}" class="link-menu">
+                    <span>
+                        <i class="bi bi-envelope"></i>
+                    </span>
+                    CAIXA DE ENTRADA
+                </a>
+            </li>
+            <li class="nav-menu">
+                <a href="{{ route('painel.newsletter') }}" class="link-menu">
+                    <span>
+                        <i class="bi bi-envelope-open"></i>
+                    </span>
+                    NEWSLETTER
                 </a>
             </li>
             <li class="nav-menu">
@@ -32,7 +45,7 @@
                     VAGAS
                 </a>
             </li>
-            <li class="nav-menu">
+            <!--li class="nav-menu">
                 <a href="{{ route('painel.admin') }}" class="link-menu">
                     <span>
                         <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +55,7 @@
                     </span>
                     CONFIGURAÇÕES
                 </a>
-            </li>
+            </li-->
             <li class="nav-menu">
                 <a href="" class="link-menu">
                     <span>

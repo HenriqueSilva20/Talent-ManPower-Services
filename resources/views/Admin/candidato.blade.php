@@ -1,5 +1,5 @@
 @extends('Layouts.Admin.merge')
-@section('titulo', 'Caadastrar Vaga | Portal Talent')
+@section('titulo', $nome . ' | Portal Talent')
 
 @section('conteudo')
 
@@ -32,49 +32,69 @@
                         </div>
                         <div class="col-lg-5 mb-2">
                             <div class="card p-4">
-                                <div class="foto d-flex justify-content-center align-items-center">
+                                <div>
+                                    @if ($candidato->estado == 2)
+                                        <a href=""
+                                            style="width: 50%; margin-right: 10px; background-color: rgb(145, 231, 145) !important; padding: 5px 6px !important"
+                                            class="btn btn-opcoes mt-1 mb-4">
+                                            <i class="bi bi-check-circle text-white"></i>
+                                            <span style="color: #fff;">Aprovado</span>
+                                        </a>
+                                    @elseif ($candidato->estado == 0)
+                                        <a href=""
+                                            style="width: 50%; margin-right: 10px; background-color: rgb(184, 184, 184) !important; padding: 5px 6px !important"
+                                            class="btn btn-opcoes mt-1 mb-4">
+                                            <i class="bi bi-dots text-white"></i>
+                                            <span style="color: #fff;">Pendete</span>
+                                        </a>
+                                    @elseif ($candidato->estado == 3)
+                                        <a href=""
+                                            style="width: 50%; margin-right: 10px; background-color: rgb(231, 154, 145) !important; padding: 5px 6px !important"
+                                            class="btn btn-opcoes mt-1 mb-4">
+                                            <i class="bi bi-x-circle text-white"></i>
+                                            <span style="color: #fff;">Rejeitada</span>
+                                        </a>
+                                    @endif
+                                </div>
+                                <div class="foto mb-4 d-flex justify-content-center align-items-center">
                                     <svg width="114" height="114" viewBox="0 0 114 114" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="57" cy="57" r="57" fill="#C0E8EB" />
                                     </svg>
                                 </div>
-                                <div class="header-info mb-4 d-flex justify-content-between">
+                                <div class="header-info mb-4 mt-4 d-flex justify-content-between">
                                     <div class="data" style="zoom: 0.8;">
                                         <b>NOME</b><br>
-                                        <span>Helder Adelino Cambuta</span>
+                                        <span> {{ $candidato->nome }}</span>
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <div class="data" style="zoom: 0.8;">
                                         <b>TELEFONE</b><br>
-                                        <span>heldercambuta444@gmail.com</span>
+                                        <span> {{ $candidato->telefone }}</span>
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <div class="data" style="zoom: 0.8;">
-                                        <b>EXPERIÊNCIA DE TRABALHO</b><br>
-                                        <span>+2 anos de Experiência</span>
+                                        <b>EMAIL</b><br>
+                                        <span> {{ $candidato->email }}</span>
                                     </div>
                                 </div>
-                                <div class="mb-4">
-                                    <div class="data" style="zoom: 0.8;">
-                                        <b>NÍVEL DE INGLÊS</b><br>
-                                        <span>heldercambuta444@gmail.com</span>
-                                    </div>
+                                <div style="display: flex">
+                                    <a href="{{ route('painel.candidato.estado', ['id' => $candidato->id, 'estado' => 2]) }}"
+                                        style="width: 50%; margin-right: 10px; background-color: rgb(145, 231, 145) !important"
+                                        class="btn btn-opcoes mt-4">
+                                        <i class="bi bi-check-circle text-white"></i>
+                                        <span style="color: #fff;">Aceitar</span>
+                                    </a>
+                                    <a href="{{ route('painel.candidato.estado', ['id' => $candidato->id, 'estado' => 3]) }}"
+                                        style="width: 50%;  background-color: rgb(228, 116, 116) !important"
+                                        class="btn btn-opcoes mt-4">
+                                        <i class="bi bi-x-circle text-white"></i>
+                                        <span style="color: #fff;">Rejeitar</span>
+                                    </a>
                                 </div>
-                                <div class="mb-4">
-                                    <div class="data" style="zoom: 0.8;">
-                                        <b>NÍVEL DE INGLÊS</b><br>
-                                        <span>heldercambuta444@gmail.com</span>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <div class="data" style="zoom: 0.8;">
-                                        <b>NÍVEL DE INGLÊS</b><br>
-                                        <span>heldercambuta444@gmail.com</span>
-                                    </div>
-                                </div>
-                                <a href="" class="btn btn-opcoes mt-4">
+                                <a href="#" id="btnGerarPDF" class="btn btn-opcoes mt-4">
                                     <svg width="18" height="19" viewBox="0 0 18 19" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -88,183 +108,160 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="card p-4">
-                                <h5 style="font-size: .9rem;" class="mb-4">Informações complementares</h5>
+                                <h5 style="font-size: .9rem;" class="">Experiências de Trabalho</h5>
+                                @php
+                                    $experiencias = json_decode($candidato->experiencias);
+                                @endphp
                                 <table>
                                     <tbody>
                                         <tr class="mb-4">
                                             <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Possui inscrição no Instituto Nacional de
-                                                    Segurança Social?</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.112 9H6.032L4.144 6.312L2.256 9H0.16L3.072 4.792L0.384 0.936H2.528L4.144 3.256L5.744 0.936H7.904L5.2 4.792L8.112 9Z"
-                                                            fill="#333333" />
-                                                    </svg>
-                                                </span>
+                                                <ul>
+                                                    @foreach ($experiencias as $experiencia)
+                                                        <li style="margin-bottom: 5px;">{{ $experiencia }}</li>
+                                                    @endforeach
+                                                </ul>
                                             </td>
                                         </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <h5 style="font-size: .9rem;" class="">Requisitos Compridos</h5>
+                                @php
+                                    $requisitos = json_decode($candidato->requisitos);
+                                @endphp
+                                <table>
+                                    <tbody>
                                         <tr class="mb-4">
                                             <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Possui inscrição no Instituto Nacional de
-                                                    Segurança Social?</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.112 9H6.032L4.144 6.312L2.256 9H0.16L3.072 4.792L0.384 0.936H2.528L4.144 3.256L5.744 0.936H7.904L5.2 4.792L8.112 9Z"
-                                                            fill="#333333" />
-                                                    </svg>
-                                                </span>
+                                                <ul>
+                                                    @foreach ($requisitos as $requisito)
+                                                        <li style="margin-bottom: 5px;">{{ $requisito }}</li>
+                                                    @endforeach
+                                                </ul>
                                             </td>
                                         </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <h5 style="font-size: .9rem;" class="">Qualificações</h5>
+                                @php
+                                    $qualificacoes = json_decode($candidato->qualificacoes);
+                                @endphp
+                                <table>
+                                    <tbody>
                                         <tr class="mb-4">
                                             <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Possui inscrição no Instituto Nacional de
-                                                    Segurança Social?</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.112 9H6.032L4.144 6.312L2.256 9H0.16L3.072 4.792L0.384 0.936H2.528L4.144 3.256L5.744 0.936H7.904L5.2 4.792L8.112 9Z"
-                                                            fill="#333333" />
-                                                    </svg>
-                                                </span>
+                                                <ul>
+                                                    @foreach ($qualificacoes as $qualificacao)
+                                                        <li style="margin-bottom: 5px;">{{ $qualificacao }}</li>
+                                                    @endforeach
+                                                </ul>
                                             </td>
                                         </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 d-none" id="documentopdf">
+                            <div class="card p-4">
+                                <div>
+                                    @if ($candidato->estado == 2)
+                                        <a href=""
+                                            style="width: 20%; margin-right: 10px; background-color: rgb(145, 231, 145) !important; padding: 5px 6px !important"
+                                            class="btn btn-opcoes mt-1 mb-4">
+                                            <i class="bi bi-check-circle text-white"></i>
+                                            <span style="color: #fff;">Aprovado</span>
+                                        </a>
+                                    @elseif ($candidato->estado == 0)
+                                        <a href=""
+                                            style="width: 20%; margin-right: 10px; background-color: rgb(184, 184, 184) !important; padding: 5px 6px !important"
+                                            class="btn btn-opcoes mt-1 mb-4">
+                                            <i class="bi bi-dots text-white"></i>
+                                            <span style="color: #fff;">Pendete</span>
+                                        </a>
+                                    @elseif ($candidato->estado == 3)
+                                        <a href=""
+                                            style="width: 20%; margin-right: 10px; background-color: rgb(231, 154, 145) !important; padding: 5px 6px !important"
+                                            class="btn btn-opcoes mt-1 mb-4">
+                                            <i class="bi bi-x-circle text-white"></i>
+                                            <span style="color: #fff;">Rejeitada</span>
+                                        </a>
+                                    @endif
+                                </div>
+                                <div class="foto mb-4 d-flex justify-content-left align-items-left">
+                                    <svg width="200" height="200" viewBox="0 0 114 114" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="57" cy="57" r="57" fill="#C0E8EB" />
+                                    </svg>
+                                </div>
+                                <div class="header-info mb-4 mt-4 d-flex justify-content-between">
+                                    <div class="data" style="zoom: 0.8;">
+                                        <b>NOME</b><br>
+                                        <span> {{ $candidato->nome }}</span>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="data" style="zoom: 0.8;">
+                                        <b>TELEFONE</b><br>
+                                        <span> {{ $candidato->telefone }}</span>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="data" style="zoom: 0.8;">
+                                        <b>EMAIL</b><br>
+                                        <span> {{ $candidato->email }}</span>
+                                    </div>
+                                </div>
+                                <h5 style="font-size: .9rem;" class="">Experiências de Trabalho</h5>
+                                @php
+                                    $experiencias = json_decode($candidato->experiencias);
+                                @endphp
+                                <table>
+                                    <tbody>
                                         <tr class="mb-4">
                                             <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Possui inscrição no Instituto Nacional
-                                                    de Segurança Social?</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.112 9H6.032L4.144 6.312L2.256 9H0.16L3.072 4.792L0.384 0.936H2.528L4.144 3.256L5.744 0.936H7.904L5.2 4.792L8.112 9Z"
-                                                            fill="#333333" />
-                                                    </svg>
-                                                </span>
+                                                <ul>
+                                                    @foreach ($experiencias as $experiencia)
+                                                        <li style="margin-bottom: 5px;">{{ $experiencia }}</li>
+                                                    @endforeach
+                                                </ul>
                                             </td>
                                         </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <h5 style="font-size: .9rem;" class="">Requisitos Compridos</h5>
+                                @php
+                                    $requisitos = json_decode($candidato->requisitos);
+                                @endphp
+                                <table>
+                                    <tbody>
                                         <tr class="mb-4">
                                             <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Possui inscrição no Instituto Nacional
-                                                    de Segurança Social?</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.112 9H6.032L4.144 6.312L2.256 9H0.16L3.072 4.792L0.384 0.936H2.528L4.144 3.256L5.744 0.936H7.904L5.2 4.792L8.112 9Z"
-                                                            fill="#333333" />
-                                                    </svg>
-                                                </span>
+                                                <ul>
+                                                    @foreach ($requisitos as $requisito)
+                                                        <li style="margin-bottom: 5px;">{{ $requisito }}</li>
+                                                    @endforeach
+                                                </ul>
                                             </td>
                                         </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <h5 style="font-size: .9rem;" class="">Qualificações</h5>
+                                @php
+                                    $qualificacoes = json_decode($candidato->qualificacoes);
+                                @endphp
+                                <table>
+                                    <tbody>
                                         <tr class="mb-4">
                                             <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Possui inscrição no Instituto Nacional
-                                                    de Segurança Social?</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.112 9H6.032L4.144 6.312L2.256 9H0.16L3.072 4.792L0.384 0.936H2.528L4.144 3.256L5.744 0.936H7.904L5.2 4.792L8.112 9Z"
-                                                            fill="#333333" />
-                                                    </svg>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Possui inscrição no Instituto Nacional
-                                                    de Segurança Social?</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.112 9H6.032L4.144 6.312L2.256 9H0.16L3.072 4.792L0.384 0.936H2.528L4.144 3.256L5.744 0.936H7.904L5.2 4.792L8.112 9Z"
-                                                            fill="#333333" />
-                                                    </svg>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Possui inscrição no Instituto Nacional
-                                                    de Segurança Social?</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.112 9H6.032L4.144 6.312L2.256 9H0.16L3.072 4.792L0.384 0.936H2.528L4.144 3.256L5.744 0.936H7.904L5.2 4.792L8.112 9Z"
-                                                            fill="#333333" />
-                                                    </svg>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Possui inscrição no Instituto Nacional
-                                                    de Segurança Social?</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.112 9H6.032L4.144 6.312L2.256 9H0.16L3.072 4.792L0.384 0.936H2.528L4.144 3.256L5.744 0.936H7.904L5.2 4.792L8.112 9Z"
-                                                            fill="#333333" />
-                                                    </svg>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Possui inscrição no Instituto Nacional
-                                                    de Segurança Social?</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.112 9H6.032L4.144 6.312L2.256 9H0.16L3.072 4.792L0.384 0.936H2.528L4.144 3.256L5.744 0.936H7.904L5.2 4.792L8.112 9Z"
-                                                            fill="#333333" />
-                                                    </svg>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr class="mb-4">
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">Possui inscrição no Instituto Nacional
-                                                    de Segurança Social?</span>
-                                            </td>
-                                            <td style="font-size: .7rem; font-weight: 450;">
-                                                <span style="margin-bottom: 25px;">
-                                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M8.112 9H6.032L4.144 6.312L2.256 9H0.16L3.072 4.792L0.384 0.936H2.528L4.144 3.256L5.744 0.936H7.904L5.2 4.792L8.112 9Z"
-                                                            fill="#333333" />
-                                                    </svg>
-                                                </span>
+                                                <ul>
+                                                    @foreach ($qualificacoes as $qualificacao)
+                                                        <li style="margin-bottom: 5px;">{{ $qualificacao }}</li>
+                                                    @endforeach
+                                                </ul>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -276,5 +273,60 @@
             </div>
         </div>
     </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    @if (session('candidato.estado.success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso',
+                text: 'Estado da candidatura atualizada com sucesso',
+                timer: 3000
+            })
+        </script>
+    @endif
+
+    @if (session('candidato.estado.error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Falha ao atualizar o estado do candidatura',
+                timer: 3000
+            })
+        </script>
+    @endif
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+
+    <script type="text/javascript">
+        // Defina a div que será convertida em PDF
+        const divToConvert = document.getElementById('documentopdf');
+
+        // Função para gerar o PDF
+        function gerarPDF() {
+            // Converta o conteúdo da div em uma imagem
+            html2canvas(divToConvert)
+                .then(canvas => {
+                    // Crie um novo documento PDF
+                    const doc = new jsPDF();
+
+                    // Adicione a imagem ao PDF
+                    doc.addImage(canvas, 'PNG', 0, 0, 210, 297);
+
+                    // Salve o PDF com um nome
+                    doc.save('Dados de candidatura - Talent ManPower Service.pdf');
+                });
+        }
+
+        // Adicione um evento de clique ao botão
+        const btnGerarPDF = document.getElementById('btnGerarPDF');
+        btnGerarPDF.addEventListener('click', gerarPDF);
+    </script>
 
 @endsection

@@ -1,12 +1,19 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminCadastrar;
+use App\Http\Controllers\Admin\AdminCaixaEntrada;
 use App\Http\Controllers\Admin\AdminCandidatos;
 use App\Http\Controllers\Admin\AdminHome;
 use App\Http\Controllers\Admin\AdminInfoVaga;
 use App\Http\Controllers\Admin\AdminLogin;
+use App\Http\Controllers\Admin\AdminManager;
+use App\Http\Controllers\Admin\AdminNewsletter;
 use App\Http\Controllers\Admin\AdminVagas;
 use App\Http\Controllers\Plataforma\PlataformaHome;
+use App\Http\Controllers\Plataforma\PlataformaResultado;
+use App\Http\Controllers\Plataforma\PlataformaVagaDetalhe;
+use App\Http\Controllers\Plataforma\PlataformaVagas;
+use App\Http\Controllers\Plataforma\PlataformaVerificarCandidatura;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +32,7 @@ use Illuminate\Support\Facades\Route;
  * Routa para o template da Loja
  */
 Route::get('/', [PlataformaHome::class, 'index'])->name('plataforma');
-Route::get('login', [AdminLogin::class, 'index'])->name('painel.login');
+Route::get('entrar', [AdminLogin::class, 'index'])->name('painel.login');
 
 /*
 Route::middleware(['auth', 'Admin'])->middleware(['auth', 'Admin'])->group(function () {
@@ -38,6 +45,26 @@ Route::prefix('plataforma')->group(function () {
     // Routas HomePage
     $codesearch = sha1("12345678901233736393hmcmc9990991mnvv202029vmvchdjdj345678901234567890");
     Route::get('/home', [PlataformaHome::class, 'index'])->name('plataforma.home');
+    Route::post('/home/contacto', [PlataformaHome::class, 'contacto'])->name('plataforma.contacto');
+    Route::post('/home/newsletter', [PlataformaHome::class, 'newsletter'])->name('plataforma.newsletter');
+    //------------------------------------------------------------
+
+    // Routas VagasPage
+    Route::get('/vagas', [PlataformaVagas::class, 'index'])->name('plataforma.vagas');
+    //------------------------------------------------------------
+
+    // Routas VagaDetalhePage
+    Route::get('/vaga/{id}/{nome}', [PlataformaVagaDetalhe::class, 'index'])->name('plataforma.detalhe');
+    Route::post('/vaga/candidatura', [PlataformaVagaDetalhe::class, 'candidatura'])->name('plataforma.candidatura');
+    //------------------------------------------------------------
+
+    // Routas VerificarCandidaturaPage
+    Route::get('/verificação', [PlataformaVerificarCandidatura::class, 'index'])->name('plataforma.verificar');
+    Route::post('/verificação/store', [PlataformaVerificarCandidatura::class, 'store'])->name('plataforma.verificar.store');
+    //------------------------------------------------------------
+
+    // Routas ResultadoPage
+    Route::get('/resultado/{id}', [PlataformaResultado::class, 'index'])->name('plataforma.resultado');
     //------------------------------------------------------------
 
 });
@@ -65,7 +92,25 @@ Route::prefix('painel')->group(function(){
     //------------------------------------------------------------
 
     //Candidatos
-    Route::get('/candidatos', [AdminCandidatos::class, 'index'])->name('painel.candidatos');
+    Route::get('/candidatos/{id}/{nome}', [AdminCandidatos::class, 'index'])->name('painel.candidatos');
+    Route::get('/candidatos/estado/{id}/{estado}', [AdminCandidatos::class, 'estado'])->name('painel.candidato.estado');
+    //------------------------------------------------------------
+
+    //Caixa de entrada
+    Route::get('/caixa', [AdminCaixaEntrada::class, 'index'])->name('painel.caixa');
+    Route::get('/caixa/delete/{id}', [AdminCaixaEntrada::class, 'destroy'])->name('painel.caixa.delete');
+    //------------------------------------------------------------
+
+    //Newsletter
+    Route::get('/newsletter', [AdminNewsletter::class, 'index'])->name('painel.newsletter');
+    //------------------------------------------------------------
+
+    //Administradores
+    Route::get('/administradores', [AdminManager::class, 'index'])->name('painel.admins');
+    Route::post('/administradores/create', [AdminManager::class, 'store'])->name('painel.admin.store');
+    Route::post('/administradores/update/{id}', [AdminManager::class, 'update'])->name('painel.admin.update');
+    Route::get('/administradores/estado/{id}/{estado}', [AdminManager::class, 'estado'])->name('painel.admin.estado');
+    Route::get('/administradores/delete/{id}', [AdminManager::class, 'destroy'])->name('painel.admin.delete');
     //------------------------------------------------------------
 
 });

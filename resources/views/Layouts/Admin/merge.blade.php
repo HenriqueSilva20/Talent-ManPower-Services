@@ -10,6 +10,10 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    <link href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.js" defer></script>
+
+
     <style>
         .loading {
             position: fixed;
@@ -87,6 +91,35 @@
         }
     </style>
 
+
+    <script src="https://cdn.tiny.cloud/1/74uvopligr0kjt0guai2dbpx57ozjpggqeayeh2fxfdhiazz/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#basic-conf',
+            width: 750,
+            height: 500,
+            language: 'pt', // Adicionando a configuração do idioma para português
+            plugins: [
+                'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
+                'searchreplace', 'wordcount', 'visualblocks', 'code', 'fullscreen', 'insertdatetime',
+                'table', 'emoticons', 'template', 'help'
+            ],
+            toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | ' +
+                'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
+                'forecolor backcolor emoticons | help',
+            menu: {
+                favs: {
+                    title: 'Favoritos',
+                    items: 'code visualaid | searchreplace | emoticons'
+                }
+            },
+            mediaQueries: true,
+            menubar: 'favs file edit view insert format tools table help',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+        });
+    </script>
+
 </head>
 
 <body>
@@ -98,15 +131,15 @@
         </div>
     </div>
 
-    {{---
+    {{-- -
     @if (Auth::user()->acesso == 1)
         <?php Auth::logout(); ?>
     @endif
-    ----}}
+    -- --}}
 
     @yield('conteudo')
 
-    @include('Layouts.Plataforma.rodape')
+    @include('Layouts.Admin.rodape')
 
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {
@@ -130,6 +163,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 
 </body>
 
