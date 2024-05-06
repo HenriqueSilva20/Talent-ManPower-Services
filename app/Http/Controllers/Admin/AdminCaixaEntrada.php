@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\contacto;
 use App\Models\Vagas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCaixaEntrada extends Controller
 {
@@ -14,9 +15,12 @@ class AdminCaixaEntrada extends Controller
      */
     public function index()
     {
-
-        $mensagens = contacto::orderBy('id', 'desc')->paginate(12);
-        return view('Admin.caixa', compact('mensagens'));
+        if (Auth::check()) {
+            $mensagens = contacto::orderBy('id', 'desc')->paginate(12);
+            return view('Admin.caixa', compact('mensagens'));
+        } else {
+            return view('auth.login');
+        }
 
     }
 

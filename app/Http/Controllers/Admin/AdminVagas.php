@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Vagas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminVagas extends Controller
 {
@@ -14,35 +15,41 @@ class AdminVagas extends Controller
     public function index()
     {
 
-        if (isset($_GET['estado'])) {
+        if (Auth::check()) {
 
-            $estado = base64_decode($_GET['estado']);
+            if (isset($_GET['estado'])) {
 
-            if ($estado == "activo") {
+                $estado = base64_decode($_GET['estado']);
 
-                $vagas = Vagas::where('estado', 0)->orderBy('titulo', 'asc')->paginate(12);
+                if ($estado == "activo") {
+
+                    $vagas = Vagas::where('estado', 0)->orderBy('titulo', 'asc')->paginate(12);
+                    return view('Admin.vagas', compact('vagas'));
+
+                } else if ($estado == "inactivo") {
+
+                    $vagas = Vagas::where('estado', 1)->orderBy('titulo', 'asc')->paginate(12);
+                    return view('Admin.vagas', compact('vagas'));
+
+                }
+
+            }
+            else if (isset($_GET['vaga'])) {
+
+                $uri = $_GET['vaga'];
+
+                $vagas = Vagas::where('titulo', 'like', '%' .$uri. '%')->orderBy('titulo', 'asc')->paginate(12);
                 return view('Admin.vagas', compact('vagas'));
 
-            } else if ($estado == "inactivo") {
+            } else {
 
-                $vagas = Vagas::where('estado', 1)->orderBy('titulo', 'asc')->paginate(12);
+                $vagas = Vagas::orderBy('titulo', 'asc')->paginate(12);
                 return view('Admin.vagas', compact('vagas'));
 
             }
 
-        }
-        else if (isset($_GET['vaga'])) {
-
-            $uri = $_GET['vaga'];
-
-            $vagas = Vagas::where('titulo', 'like', '%' .$uri. '%')->orderBy('titulo', 'asc')->paginate(12);
-            return view('Admin.vagas', compact('vagas'));
-
         } else {
-
-            $vagas = Vagas::orderBy('titulo', 'asc')->paginate(12);
-            return view('Admin.vagas', compact('vagas'));
-
+            return view('auth.login');
         }
 
     }

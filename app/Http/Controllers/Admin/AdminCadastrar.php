@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Vagas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCadastrar extends Controller
 {
@@ -13,18 +14,23 @@ class AdminCadastrar extends Controller
      */
     public function index()
     {
-        if (isset($_GET['store'])) {
+        if (Auth::check()) {
+            if (isset($_GET['store'])) {
 
-            $id = base64_decode($_GET['vuw']);
-            $vaga = Vagas::findOrFail($id);
+                $id = base64_decode($_GET['vuw']);
+                $vaga = Vagas::findOrFail($id);
 
-            return view('Admin.cadastrar', compact('vaga'));
+                return view('Admin.cadastrar', compact('vaga'));
 
+            } else {
+
+                return view('Admin.cadastrar');
+
+            }
         } else {
-
-            return view('Admin.cadastrar');
-
+            return view('auth.login');
         }
+
     }
 
     /**

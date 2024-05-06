@@ -57,7 +57,7 @@
                 </a>
             </li-->
             <li class="nav-menu">
-                <a href="" class="link-menu">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="link-menu">
                     <span>
                         <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.8125 7.25V4.4375C11.8125 3.98995 11.6347 3.56072 11.3182 3.24426C11.0018 2.92779 10.5726 2.75 10.125 2.75H5.625C5.17745 2.75 4.74823 2.92779 4.43176 3.24426C4.11529 3.56072 3.9375 3.98995 3.9375 4.4375V14.5625C3.9375 15.0101 4.11529 15.4393 4.43176 15.7557C4.74823 16.0722 5.17745 16.25 5.625 16.25H10.125C10.5726 16.25 11.0018 16.0722 11.3182 15.7557C11.6347 15.4393 11.8125 15.0101 11.8125 14.5625V11.75M9 7.25L6.75 9.5M6.75 9.5L9 11.75M6.75 9.5H16.3125" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

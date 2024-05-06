@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Candidatos;
 use App\Models\Vagas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminInfoVaga extends Controller
 {
@@ -14,12 +15,16 @@ class AdminInfoVaga extends Controller
      */
     public function index(string $id, string $titulo)
     {
-        $vaga = Vagas::findOrFail(base64_decode($id));
-        $titulo = ($titulo);
+        if (Auth::check()) {
+            $vaga = Vagas::findOrFail(base64_decode($id));
+            $titulo = ($titulo);
 
-        $candidatos = Candidatos::where('idvaga', base64_decode($id))->paginate(12);
+            $candidatos = Candidatos::where('idvaga', base64_decode($id))->paginate(12);
 
-        return view('Admin.infovaga', compact('vaga', 'titulo', 'candidatos'));
+            return view('Admin.infovaga', compact('vaga', 'titulo', 'candidatos'));
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**

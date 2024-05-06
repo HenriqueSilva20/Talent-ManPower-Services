@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Vagas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,8 +17,12 @@ class AdminManager extends Controller
      */
     public function index()
     {
-        $admins = User::orderBy('name', 'asc')->paginate(12);
-        return view('Admin.admin', compact('admins'));
+        if (Auth::check()) {
+            $admins = User::orderBy('name', 'asc')->paginate(12);
+            return view('Admin.admin', compact('admins'));
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**

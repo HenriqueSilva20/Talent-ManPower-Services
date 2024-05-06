@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminHome extends Controller
 {
@@ -12,7 +13,11 @@ class AdminHome extends Controller
      */
     public function index()
     {
-        return view('Admin.index');
+        if (Auth::check()) {
+            return view('Admin.index');
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**

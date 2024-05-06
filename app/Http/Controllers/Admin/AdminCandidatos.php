@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Candidatos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCandidatos extends Controller
 {
@@ -13,9 +14,13 @@ class AdminCandidatos extends Controller
      */
     public function index(string $id, string $nome_candidato)
     {
-        $nome = $nome_candidato;
-        $candidato = Candidatos::findOrFail(base64_decode($id));
-        return view('Admin.candidato', compact('candidato', 'nome'));
+        if (Auth::check()) {
+            $nome = $nome_candidato;
+            $candidato = Candidatos::findOrFail(base64_decode($id));
+            return view('Admin.candidato', compact('candidato', 'nome'));
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**

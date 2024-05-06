@@ -141,6 +141,51 @@
 
     @include('Layouts.Admin.rodape')
 
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+
+    <!-- Modal - Calendar - Add New Event -->
+    <div class="modal fade none-border" id="editAdminPerfil{{Auth::User()->id}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><strong>Editar dados do admin</strong></h4>
+                </div>
+                <form action="{{ route('admin.update', Auth::User()->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12 form-group mb-3">
+                                <label for="nome">Nome completo</label>
+                                <input type="text" name="nome" id="nome" value="{{ Auth::User()->name }}" class="form-control">
+                            </div>
+                            <div class="col-lg-12 form-group mb-3">
+                                <label for="telefone">Nº de Telefone</label>
+                                <input type="tel" name="telefone" id="telefone"  value="{{ Auth::User()->telefone }}" class="form-control">
+                            </div>
+                            <div class="col-lg-12 form-group mb-3">
+                                <label for="email">Endereço de email</label>
+                                <input type="email" name="email" id="email"  value="{{ Auth::User()->email }}" class="form-control">
+                            </div>
+                            <div class="col-lg-12 form-group mb-3">
+                                <label for="foto">Foto de perfil</label>
+                                <input type="file" name="foto" id="foto" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><i class="fa fa-close"></i>Fechar</button>
+                        <button type="submit" class="btn btn-success save-event waves-effect waves-light"> <i class="fa fa-save"></i> Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /#event-modal -->
+
+
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {
             // Mostra o loading ao iniciar o carregamento da página

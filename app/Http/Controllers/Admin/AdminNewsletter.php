@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\emails;
 use App\Models\Vagas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminNewsletter extends Controller
 {
@@ -14,9 +15,12 @@ class AdminNewsletter extends Controller
      */
     public function index()
     {
-
-        $mensagens = emails::orderBy('id', 'desc')->paginate(12);
-        return view('Admin.newsletter', compact('mensagens'));
+        if (Auth::check()) {
+            $mensagens = emails::orderBy('id', 'desc')->paginate(12);
+            return view('Admin.newsletter', compact('mensagens'));
+        } else {
+            return view('auth.login');
+        }
 
     }
 

@@ -17,10 +17,10 @@
                             <i class="bi bi-chevron-left"></i>
                         </button>
                     </div>
-                    <div class="perfil">
-                        <img src="img/Group12.jpg" alt="">
+                    <a href="#" data-toggle="modal" data-target="#editAdminPerfil{{-- Auth::User()->id --}}"  class="perfil">
+                        <img src="/admin/img/Group12.jpg" alt="">
                         <i class="bi bi-chevron-down"></i>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="row">
